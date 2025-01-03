@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Towny 插件指令</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            margin: 20px;
+        }
+        h1 {
+            text-align: center;
+        }
+        input[type="text"] {
+            width: 100%;
+            padding: 12px;
+            margin: 20px 0;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        tr:hover {
+            background-color: #f1f1f1;
+        }
+    </style>
+</head>
+<body>
+    <h1>Towny 插件指令</h1>
+    <input type="text" id="searchInput" onkeyup="searchTable()" placeholder="搜索指令...">
+    <table id="commandsTable">
+        <thead>
+            <tr>
+                <th>指令</th>
+                <th>描述</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- 城镇管理指令 -->
+            <tr><td>/town</td><td>显示城镇信息。</td></tr>
+            <tr><td>/town new [name]</td><td>创建一个新城镇。</td></tr>
+            <tr><td>/town delete [name]</td><td>删除一个城镇（管理员指令）。</td></tr>
+            <tr><td>/town add [player]</td><td>邀请玩家加入城镇。</td></tr>
+            <tr><td>/town kick [player]</td><td>将玩家移出城镇。</td></tr>
+            <tr><td>/town set mayor [player]</td><td>设置新的城镇市长。</td></tr>
+            <tr><td>/town set name [new name]</td><td>更改城镇名称。</td></tr>
+            <tr><td>/town claim</td><td>为城镇占领当前地块。</td></tr>
+            <tr><td>/town unclaim</td><td>取消当前地块的占领。</td></tr>
+            <tr><td>/town spawn</td><td>传送到城镇的出生点。</td></tr>
+            <tr><td>/town deposit [amount]</td><td>向城镇银行存款。</td></tr>
+            <tr><td>/town withdraw [amount]</td><td>从城镇银行取款。</td></tr>
+            <tr><td>/town set board [message]</td><td>设置城镇公告板信息。</td></tr>
+            <tr><td>/town set homeblock</td><td>设置城镇的中心地块。</td></tr>
+            <tr><td>/town rank add [player] [rank]</td><td>为玩家添加城镇头衔。</td></tr>
+            <tr><td>/town rank remove [player] [rank]</td><td>移除玩家的城镇头衔。</td></tr>
+            <!-- 国家管理指令 -->
+            <tr><td>/nation</td><td>显示国家信息。</td></tr>
+            <tr><td>/nation new [name]</td><td>创建一个新国家。</td></tr>
+            <tr><td>/nation delete [name]</td><td>删除一个国家（管理员指令）。</td></tr>
+            <tr><td>/nation add [town]</td><td>邀请城镇加入国家。</td></tr>
+            <tr><td>/nation kick [town]</td><td>将城镇移出国家。</td></tr>
+            <tr><td>/nation set king [player]</td><td>设置新的国家国王。</td></tr>
+            <tr><td>/nation set name [new name]</td><td>更改国家名称。</td></tr>
+            <tr><td>/nation set capital [town]</td><td>设置国家首都。</td></tr>
+            <tr><td>/nation ally add [nation]</td><td>添加盟国。</td></tr>
+            <tr><td>/nation ally remove [nation]</td><td>移除盟国。</td></tr>
+            <tr><td>/nation enemy add [nation]</td><td>添加敌对国家。</td></tr>
+            <tr><td>/nation enemy remove [nation]</td><td>移除敌对国家。</td></tr>
+            <tr><td>/nation deposit [amount]</td><td>向国家银行存款。</td></tr>
+            <tr><td>/nation withdraw [amount]</td><td>从国家银行取款。</td></tr>
+            <tr><td>/nation rank add [player] [rank]</td><td>为玩家添加国家头衔。</td></tr>
+            <tr><td>/nation rank remove [player] [rank]</td><td>移除玩家的国家头衔。</td></tr>
+            <tr><td>/nation spawn</td><td>传送到国家的出生点。</td></tr>
+            <!-- 个人指令 -->
+            <tr><td>/resident</td><td>显示个人信息。</td></tr>
+            <tr><td>/resident set perm</td><td>设置个人默认权限。</td></tr>
+            <tr><td>/resident friend add [player]</td><td>添加好友。</td></tr>
+            <tr><td>/resident friend remove [player]</td><td>移除好友。</td></tr>
+            <tr><td>/resident friend list</td><td>列出所有好友。</td></tr>
+            <!-- 地块管理指令 -->
+            <tr><td>/plot claim</td><td>占领当前地块。</td></tr>
+            <tr><td>/plot unclaim</td><td>放弃当前地块。</td></tr>
+            <tr><td>/plot forsale [price]</td><td>将地块挂牌出售。</td></tr>
+            <tr><td>/plot notforsale</td><td>取消地块的出售状态。</td></tr>
+            <tr><td>/plot set shop</td><td>将地块设置为商店。</td></tr>
+            <tr><td>/plot set embassy</td><td>将地块设置为大使馆。</td></tr>
+            <tr><td>/plot set arena</td><td>将地块设置为竞技场。</td></tr>
+            <tr><td>/plot set farm</td><td>将地块设置为农场。</td></tr>
+            <tr><td>/plot set jail</td><td>将地块设置为监狱。</td></tr>
+            <tr><td>/plot toggle pvp</td><td>切换地块的 PvP 状态。</td></tr>
+            <tr><td>/plot toggle fire</td><td>切换地块的火焰蔓延状态。</td></tr>
+            <tr><td>/plot toggle explosion</td><td>切换地块的爆炸状态。</td></tr>
+            <tr><td>/plot toggle mob</td><td>切换地块的怪物生成状态。</td></tr>
+            <!-- 管理员指令 -->
+            <tr><td>/townyadmin</td><td>访问 Towny 管理员指令。</td></tr>
+            <tr><td>/townyadmin set mayor [town] [player]</td><td>设置城镇的市长。</td></tr>
+            <tr><td>/townyadmin delete town [name]</td><td>删除一个城镇。</td></tr>
+            <tr><td>/townyadmin delete nation [name]</td><td>删除一个国家。</td></tr>
+            <tr><td>/townyadmin toggle war</td><td>切换战争模式。</td></tr>
+            <tr><td>/townyadmin reload</td><td>重新加载 Towny 插件。</td></tr>
+            <tr><td>/townyadmin backup</td><td>创建 Towny 数据备份。</td></tr>
+            <tr><td>/townyadmin reset</td><td>重置 Towny 数据（谨慎使用）。</td></tr>
+            <tr><td>/townyadmin givebonus [town] [amount]</td><td>为城镇提供额外地块奖励。</td></tr>
+            <tr><td>/townyadmin tpplot [world] [x] [z]</td><td>传送到指定地块。</td></tr>
+            <tr><td>/townyadmin resident [player]</td><td>管理玩家的 Towny 数据。</td></tr>
+            <tr><td>/townyadmin town [town]</td><td>管理城镇的 Towny 数据。</td></tr>
+            <tr><td>/townyadmin nation [nation]</td><td>管理国家的 Towny 数据。</td></tr>
+        </tbody>
+    </table>
+    <script>
+        function searchTable() {
+            const input = document.getElementById('searchInput');
+            const filter = input.value.toLowerCase();
+            const table = document.getElementById('commandsTable');
+            const rows = table.getElementsByTagName('tr');
+
+            for (let i = 1; i < rows.length; i++) {
+                let cells = rows[i].getElementsByTagName('td');
+                let match = false;
+                for (let j = 0; j < cells.length; j++) {
+                    if (cells[j]) {
+                        if (cells[j].textContent.toLowerCase().indexOf(filter) > -1) {
+                            match = true;
+                            break;
+                        }
+                    }
+                }
+                rows[i].style.display = match ? '' : 'none';
+            }
+        }
+    </script>
+</body>
+</html>
